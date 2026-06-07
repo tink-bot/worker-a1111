@@ -15,10 +15,13 @@ FROM python:3.10.14-slim as build_final_image
 
 ARG A1111_RELEASE=v1.9.3
 
+# Stability-AI/stablediffusion was taken down upstream, so point A1111 at a
+# mirror (w-e-w is an A1111 maintainer) that still has the pinned commit.
 ENV DEBIAN_FRONTEND=noninteractive \
     PIP_PREFER_BINARY=1 \
     ROOT=/stable-diffusion-webui \
-    PYTHONUNBUFFERED=1
+    PYTHONUNBUFFERED=1 \
+    STABLE_DIFFUSION_REPO=https://github.com/w-e-w/stablediffusion.git
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
